@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<personnes>
+	<personne sexe="masculin">
+	  <nom>DUPONT</nom>
+	  <job>DataScientist</job>
+	</personne>
+	<personne sexe="masculin">
+	  <nom>MOREAU</nom>
+	  <job>Clown</job>
+	</personne>
+	<personne sexe="masculin">
+	  <nom>AGNES</nom>
+	  <job>Veterinaire</job>
+	</personne>
+</personnes>

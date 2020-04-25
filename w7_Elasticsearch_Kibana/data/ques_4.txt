@@ -1,0 +1,49 @@
+
+{"index":{"_index": "cine","_id":2}}
+{"date_pub" : "2013-09-02","notation" : 8.3,"genre" : ["Action","Biography","Drama","Sport"], "titre" : "Rush"}
+{"index":{"_index": "cine","_id":3}}
+{"date_pub" : "2013-08-30","notation" : 8.2,"genre" : ["Crime","Drama","Thriller"],"titre" : "Prisoners"}
+{"index":{"_index": "cine","_id":4}}
+{"date_pub" : "2013-11-11","genre" : ["Action","Adventure","Sci-Fi","Thriller"],"titre" : "The Hunger Games: Catching Fire"}
+{"index":{"_index": "cine","_id":5}}
+{"date_pub" : "2013-10-30","genre" : ["Action","Adventure","Fantasy"],"titre" : "Thor: The Dark World"}
+{"index":{"_index": "cine","_id":6}}
+{"date_pub" : "2013-06-03","notation" : 7.2,"genre" : ["Comedy","Fantasy"],"titre" : "This Is the End"}
+{"index":{"_index": "cine","_id":7}}
+{"date_pub" : "2013-09-13","notation" : 7.1,"genre" : ["Horror","Thriller"],"titre" : "Insidious: Chapter 2"}
+{"index":{"_index": "cine","_id":8}}
+{"date_pub" : "2013-06-02","notation" : 7.1,"genre" : ["Action","Adventure","Horror","Sci-Fi","Thriller"],"titre" : "World War Z"}
+{"index":{"_index": "cine","_id":9}}
+{"date_pub" : "2014-05-21","genre" : ["Action","Adventure","Fantasy","Sci-Fi"],"titre" : "X-Men: Days of Future Past"}
+{"index":{"_index": "cine","_id":10}}
+{"date_pub" : "2014-06-25","genre" : ["Action","Adventure","Sci-Fi"],"titre" : "Transformers: Age of Extinction"}
+{"index":{"_index": "cine","_id":11}}
+{"date_pub" : "2013-05-21","notation" : 7.3,"genre" : ["Crime","Mystery","Thriller"],"titre" : "Now You See Me"}
+{"index":{"_index": "cine","_id":12}}
+{"date_pub" : "2013-08-28","notation" : 8.2,"genre" : ["Drama","Sci-Fi","Thriller"],"titre" : "Gravity"}
+{"index":{"_index": "cine","_id":13}}
+{"date_pub" : "2013-08-03","notation" : 7.2,"genre" : ["Comedy","Crime"],"titre" : "We're the Millers"}
+{"index":{"_index": "cine","_id":14}}
+{"date_pub" : "2013-09-04","notation" : 6.8,"genre" : ["Action","Sci-Fi","Thriller"],"titre" : "Riddick"}
+{"index":{"_index": "cine","_id":15}}
+{"date_pub" : "2013-09-10","notation" : 6.5,"genre" : ["Action","Comedy","Crime"],"titre" : "The Family"}
+{"index":{"_index": "cine","_id":16}}
+{"date_pub" : "2013-05-02","notation" : 7.9,"genre" : ["Action","Adventure","Sci-Fi"],"titre" : "Star Trek Into Darkness"}
+{"index":{"_index": "cine","_id":17}}
+{"date_pub" : "2013-05-01","notation" : 4.9,"genre" : ["Action","Adventure","Sci-Fi"],"titre" : "After Earth"}
+{"index":{"_index": "cine","_id":18}}
+{"date_pub" : "2013-05-01","notation" : 7.3,"genre" : ["Drama","Romance"],"titre" : "The Great Gatsby"}
+{"index":{"_index": "cine","_id":19}}
+{"date_pub" : "2013-05-23","notation" : 7.3,"genre" : ["Drama","Romance"],"titre" : "La vie d'Adèle"}
+{"index":{"_index": "cine","_id":20}}
+{"date_pub" : "2014-03-20","genre" : ["Action","Adventure","Romance","Sci-Fi"],"titre" : "Divergent"}
+{"index":{"_index": "cine","_id":21}}
+{"date_pub" : "2013-01-18","notation" : 6.2,"genre" : ["Drama","Horror","Thriller"],"titre" : "We Are What We Are"}
+{"index":{"_index": "cine","_id":22}}
+{"date_pub" : "2013-04-18","notation" : 7.4,"genre" : ["Action","Adventure","Sci-Fi"],"titre" : "Iron Man 3"}
+{"index":{"_index": "cine","_id":23}}
+{"date_pub" : "2014-04-17","genre" : ["Action","Adventure","Fantasy"],"titre" : "The Amazing Spider-Man 2"}
+{"index":{"_index": "cine","_id":24}}
+{"date_pub" : "2013-08-02","notation" : 5.7,"genre" : ["Horror","Thriller"],"titre" : "Curse of Chucky"}
+{"index":{"_index": "cine","_id":25}}
+{"date_pub" : "2013-06-08","notation" : 7.7,"genre" : ["Horror","Thriller"],"titre" : "The Conjuring"}

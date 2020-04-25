@@ -1,0 +1,42 @@
+Données :
+
+OUVRIR_EN_LECTURE fichier paysA
+OUVRIR_EN_LECTURE fichier paysB
+OUVRIR_EN_CREATION_ET_EN_ECRITURE fichier résultat
+
+perfA = LIRE(paysA, perf)
+perfB = LIRE(paysB, perf)
+
+TANT QUE !FIN_FICHIER(paysA) ET !FIN_FICHIER(paysB):	
+	
+	SI perfA < perfB:
+		ECRIRE perfA dans resultat
+		perfA = LIRE(paysA,perf)
+				
+	SINON:
+		ECRIRE perfB dans resultat
+		perfB = LIRE(paysB,perf)
+	
+	FIN de SI
+	
+FIN DE TANT QUE
+
+SI FIN_FICHIER(paysA):
+	TANT QUE !FIN_DE_FICHIER(paysB):
+		perfB = LIRE(paysB,perf)
+		ECRIRE perfB dans resultat
+	FIN QUE TANT QUE
+	
+SINON:
+	TANT QUE !FIN_DE_FICHIER(paysA):
+		perfA = LIRE(paysA,perf)
+		ECRIRE perfA dans resultat
+	FIN QUE TANT QUE
+
+FIN DE SI
+
+FERMER fichier paysA
+FERMER fichier paysB
+FERMER fichier resultat
+		
+

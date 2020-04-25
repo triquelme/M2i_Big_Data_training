@@ -1,0 +1,42 @@
+<fruits>
+	<fruit>
+		<nom>Kiwi</nom>
+		<couleur>Vert</couleur>
+		<taille>2</taille>
+	</fruit>
+	<fruit>
+		<nom>Ananas</nom>
+		<couleur>Jaune</couleur>
+		<taille>7</taille>
+	</fruit>
+	<fruit>
+		<nom>Pastèque</nom>
+		<couleur>Vert</couleur>
+		<taille>10</taille>
+	</fruit>
+	<fruit>
+		<nom>Pomme Golden</nom>
+		<couleur>Jaune</couleur>
+		<taille>4</taille>
+	</fruit>
+	<fruit>
+		<nom>Tomate</nom>
+		<couleur>Rouge</couleur>
+		<taille>2</taille>
+	</fruit>
+	<fruit>
+		<nom>Kaki</nom>
+		<couleur>Orange</couleur>
+		<taille>6</taille>
+	</fruit>
+	<fruit>
+		<nom>Banane</nom>
+		<couleur>Jaune</couleur>
+		<taille>5</taille>
+	</fruit>
+	<fruit>
+		<nom>Pêche</nom>
+		<couleur>Rose</couleur>
+		<taille>4</taille>
+	</fruit>	
+</fruits>

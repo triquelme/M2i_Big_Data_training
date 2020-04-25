@@ -1,0 +1,10 @@
+chaud
+froid
+tempéré
+glacial
+brûlant
+hot
+cold
+moderate
+icy
+ardent

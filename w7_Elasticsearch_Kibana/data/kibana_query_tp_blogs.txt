@@ -1,0 +1,179 @@
+#TP
+
+#1
+GET blogs/_mapping
+
+#2
+GET blogs/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+#3
+GET blogs/_search
+{
+  "size": "100",
+  "query": {
+    "match_all": {}
+  }
+}
+
+#4
+GET blogs/_search
+{
+  "size": "100",
+  "query": {
+    "match": {
+    "date": "05/.{2}/2017"
+    }
+  }
+}
+
+GET blogs/_search
+{
+  "query": {
+    "range": {
+      "date": {
+        "gte": "04/30/2017",
+        "lt": "06/01/2017"
+      }
+    }
+  }
+}
+
+#5
+GET blogs/_search
+{
+  "size": "30",
+  "query": {
+    "match": {
+      "title": "Elastic"
+    }
+  }
+}
+
+#6
+GET blogs/_search
+{
+  "query": {
+    "match": {
+      "title": "elastic stack"
+    }
+  }
+}
+
+#7
+GET blogs/_search
+{
+  "query": {
+    "match": {
+      "title": {
+        "query": "elastic stack",
+        "operator": "and"
+      }
+    }
+  }
+}
+
+#8
+GET blogs/_search
+{
+  "query": {
+    "match": {
+      "content": "search"
+    }
+  }
+}
+
+GET blogs/_search
+{
+  "query": {
+    "match": {
+      "content": "search analytics"
+    }
+  }
+}
+
+GET blogs/_search
+{
+  "query": {
+    "match": {
+      "content": {
+        "query": "search analytics",
+        "operator": "and"
+      }
+    }
+  }
+}
+
+#9
+
+GET blogs/_search
+{
+  "query": {
+    "match_phrase": {
+      "content": "search and analytics"
+    }
+  }
+}
+
+GET blogs/_search
+{
+  "size": 3, 
+  "query": {
+    "match_phrase": {
+      "content": "search and analytics"
+    }
+  }
+}
+
+#10
+GET blogs/_search
+{
+  "size": 3,
+  "query": {
+    "match_phrase": {
+      "content": {
+        "query": "search analytics",
+        "slop": 1
+      }
+    }
+  }
+}
+
+#11
+GET /blogs/_search
+{
+  "query": {
+    "match": {
+      "content" :"performance optimizations improvements"
+    }
+  }
+}
+
+#12
+GET blogs/_search
+{
+  "query":{
+    "match":{
+        "content":{
+        "query":"performance optimizations improvements",
+        "minimum_should_match": 2
+        }
+    }
+  }
+}
+
+#13
+GET blogs/_search
+{
+  "query":{
+    "match":{
+        "content":{
+        "query":"performance optimizations improvements",
+        "minimum_should_match": 3
+        }
+    }
+  }
+}

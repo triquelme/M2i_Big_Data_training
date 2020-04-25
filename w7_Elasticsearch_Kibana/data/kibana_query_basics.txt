@@ -1,0 +1,168 @@
+GET _search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+GET _cat/indices
+GET _cat/shards
+GET _cat/nodes
+
+PUT thomas_test/_doc/1
+{
+"title": "Elasticsearch 5.0.0-beta1 released"
+}
+
+PUT thomas_test/_doc/100
+{
+"title": "Elasticsearch"
+}
+
+PUT thomas_test/_doc
+{
+"title": "Elasticsearch 5.0.0-beta1 released"
+}
+
+GET thomas_test/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+POST thomas_test/_doc/1/_update
+{
+  "doc": {
+    "title": "Coucou"
+  }
+}
+
+DELETE thomas_test/_doc/100
+
+POST comments/_doc/_bulk
+{"index":{"_id":3}}
+{"title":"Tuning Go Apps with Metricbeat","category":"Engineering"}
+{"index":{"_id":4}}
+{"title":"Elastic Stack 6.1.0 Released","category":"Releases"}
+{"index":{"_id":5}}
+{"title": "Searching for needle in", "category": "User Stories"} 
+{"update" : {"_id":5}}
+{"doc":{"title":"Searching for needle in haystack"}}
+{"delete":{"_id":4}}
+
+PUT thomas_test/_doc/1
+{
+  "id": "1",
+  "title": "Better query execution",
+  "category": "Engineering",
+  "date": "July 15, 2015",
+  "author": {
+    "first_name": "Adrien",
+    "last_name": "Grand",
+    "company": "Elastic"
+  }
+}
+
+PUT thomas_test/_doc/2
+{
+  "id": "2",
+  "title": "The Story of Sense",
+  "date": "May 28, 2015",
+  "author": {
+    "first_name": "Boaz",
+    "last_name": "Leskes"
+  }
+}
+
+GET thomas_test/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+POST thomas_test/_doc/
+{
+  "id": "57",
+  "title": "Phrase Queries: a world without Stopwords",
+  "date": "March 7, 2016",
+  "category": "Engineering",
+  "author": {
+    "first_name": "Gabriel",
+    "last_name": "Moskovicz"
+  }
+}
+
+GET thomas_test/_doc/2
+
+GET thomas_test/_search
+{
+  "query":{
+    "match": {
+      "title":"Phrase Queries"
+    }
+  }
+}
+
+GET thomas_test/_search
+{
+  "query": {
+    "match": {
+      "content": "Story"
+    }
+  }
+}
+
+GET thomas_test/_search
+{
+  "query": {
+    "match_phrase": {
+      "title": {
+        "query": "The of Story",
+        "slop": 2
+      }
+    }
+  }
+}
+
+GET thomas_test/_mapping
+
+PUT /publications/_mapping
+{
+  "properties": {
+    "title":  { "type": "text"}
+  }
+}
+
+
+PUT publications
+
+PUT /publications/_mapping/_doc
+{
+  "properties": {
+    "title":  { "type": "text"}
+  }
+}
+
+GET publications/_mapping
+
+
+PUT /my_index
+{
+  "mappings": {
+    "_doc": {
+      "properties": {
+        "name": {
+          "properties": {
+            "first": {
+              "type": "text"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+GET /my_index/_mapping

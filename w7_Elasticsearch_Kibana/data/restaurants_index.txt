@@ -1,0 +1,23 @@
+{
+  "mappings": {
+    "restaurant": { 
+      "properties": { 
+        "address":    { 
+        	"properties": {
+	            "building":    { "type": "string"  },
+	            "coord": { "type": "geo_point"  },
+	            "street":     { "type": "string"   },
+	            "zipcode":   { "type": "string"   }
+          }
+
+         }, 
+        "borough":     { "type": "string"  }, 
+        "cuisine":      { "type": "string" } ,
+        "grades":     {     "type": "nested"      }, 
+        "name":     { "type": "string"  }, 
+        "restaurant_id":     { "type": "string"  }
+        
+      }
+    }
+  }
+}
