@@ -1,0 +1,26 @@
+###
+### Create keyspace(= DataBase) site
+###
+
+CREATE KEYSPACE site WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+
+CREATE TABLE visite
+(
+   userid uuid,
+   date_visite timestamp,
+   content boolean,
+   sentiments set<text>,
+   visites map<text, int>,
+   chemins list<frozen <tuple<text, text, int>>>,
+   PRIMARY KEY (userid, date_visite)
+) WITH CLUSTERING ORDER BY (date_visite DESC);
+
+INSERT INTO visite (userid, date_visite, content, sentiments, visites, chemins)
+VALUES (
+   uuid(),
+   toTimestamp(now()),
+   false,
+   {'decu', 'surpris', 'conquis'},
+   {'commandes' : 4, 'reclamations' : 22},
+   [('commandes', 'reclamations', 4)]
+);

@@ -1,0 +1,21 @@
+status 'summary'
+
+status 'detailed'
+
+list_namespace
+
+list_namespace_tables 'default
+
+create 'music_thomas', 'artist', 'album'
+
+# put table, clé de ligne, famille_colonne:qualificateur, valeur
+put 'music_thomas', 1, 'artist:1', 'Roxy Music'
+put 'music_thomas', 1, 'artist:2', '10,000 Maniacs'
+put 'music_thomas', 1, 'album:2', 'Love among the Ruins'
+put 'music_thomas', 1, 'album:1', 'Avalon'
+
+get 'music_thomas', 1
+
+scan 'music_thomas'
+
+get 'music_thomas', 1, 'artist:1'

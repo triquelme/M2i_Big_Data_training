@@ -1,0 +1,50 @@
+###
+### Create keyspace(= DataBase) test
+###
+
+CREATE KEYSPACE test
+   ... WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+
+# DESC = "describe"
+DESC keyspace;
+
+DESC test;
+
+
+USE test;
+# prompt changes from "cqlsh" to "cqlsh:test>"
+
+# Create table semaine
+CREATE TABLE semaine (
+        ... id int PRIMARY KEY,
+        ... valeur text);
+
+DESC semaine;
+
+# Insert values into table semaine
+INSERT INTO semaine (id, valeur) VALUES (1, 'lundi');
+INSERT INTO semaine (id, valeur) VALUES (2, 'mardi');
+INSERT INTO semaine (id, valeur) VALUES (3, 'mercredi');
+INSERT INTO semaine (id, valeur) VALUES (4, 'jeudi');
+INSERT INTO semaine (id, valeur) VALUES (5, 'vendredi');
+INSERT INTO semaine (id, valeur) VALUES (6, 'samedi');
+INSERT INTO semaine (id, valeur) VALUES (7, 'dimanche');
+
+SELECT * FROM semaine
+
+# Select where
+select * from semaine WHERE valeur = 'jeudi' ALLOW FILTERING;
+
+# Insert and replace value
+INSERT INTO semaine (id, valeur) VALUES (4, 'dimanche')
+select * from semaine ;
+
+# Change back to previous value
+INSERT INTO semaine (id, valeur) VALUES (4, 'jeudi') ;
+select * from semaine ;
+
+
+
+
+
+

@@ -1,0 +1,90 @@
+CREATE DATABASE dbtest_thomas;
+
+USE dbtest_thomas;
+
+CREATE TABLE batting_thomas (player_id STRING, year INT, runs INT);
+
+LOAD DATA INPATH '/user/hue/Batting.csv' OVERWRITE INTO TABLE batting_thomas;
+
+SELECT * FROM batting_thomas;
+
+CREATE TABLE IF NOT EXISTS dbtest_thomas.NewBatting_thomas (playerID string, yearID string, stint string, teamID string,
+lgID string, G string, G_batting string, AB string, R string,
+H string, B2 string, B3 string, HR string, RBI string, SB string,
+CS string, BB string, SO string, IBB string, HBP string, SH string,
+SF string, GIDP string, G_old string)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ';' 
+TBLPROPERTIES ("skip.header.line.count"="1");
+
+LOAD DATA INPATH '/user/hue/Batting_thomas.csv' OVERWRITE INTO TABLE newbatting_thomas;
+
+SELECT * FROM newbatting_thomas;
+
+DESC EXTENDED newbatting_thomas;
+
+SHOW TBLPROPERTIES NewBatting_thomas;
+
+CREATE TABLE XYZ as select * from newbatting_thomas;
+
+SELECT * 
+FROM newbatting_thomas 
+WHERE newbatting_thomas.yearid='2004' 
+AND newbatting_thomas.teamid='DET';
+
+
+CREATE EXTERNAL TABLE IF NOT EXISTS dbtest_thomas.sirene_mini_ext
+(SIREN STRING, NIC STRING, L1_NORMALISEE STRING, CODPOS STRING) COMMENT 'Données SIRENE'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+LOCATION '/user/data/thomas/sirene_mini_thomas' 
+TBLPROPERTIES ("skip.header.line.count"="1");
+
+LOAD DATA INPATH '/user/data/thomas/sirene_mini_thomas.csv' 
+OVERWRITE INTO TABLE  dbtest_thomas.sirene_mini_ext;
+
+SELECT * FROM sirene_mini_ext;
+
+select codpos, SUBSTRING(codpos, 0,2) dept from sirene_mini_ext;
+
+select a.dept, count(*)
+from (select codpos, SUBSTRING(codpos, 0,2) dept from sirene_mini_ext) a
+group by a.dept;
+
+create view departement_list
+as select SUBSTRING(codpos, 0,2) dept 
+from sirene_mini_ext;
+
+SELECT * from departement_list;
+
+SELECT dept, count(*) nb 
+FROM departement_list
+GROUP BY dept;
+
+CREATE TABLE IF NOT EXISTS sirene_mini_dept (SIREN STRING, NIC STRING, L1_NORMALISEE STRING, CODPOS STRING, dept STRING)
+COMMENT 'Données SIRENE avec colonne département';
+
+SELECT *, SUBSTRING(codpos, 0,2) dept FROM sirene_mini_ext;
+INSERT INTO sirene_mini_dept SELECT *, SUBSTRING(codpos, 0,2) dept FROM sirene_mini_ext;
+
+-- or 
+
+create view sirene_mini_dep
+as select *, SUBSTRING(codpos, 0,2) dept 
+from sirene_mini_ext;
+
+INSERT INTO sirene_mini_dept SELECT * FROM sirene_mini_dep;
+
+CREATE TABLE IF NOT EXISTS sirene_mini_dept_partition (SIREN STRING, NIC STRING, L1_NORMALISEE STRING, CODPOS STRING)
+COMMENT 'Données SIRENE avec colonne département' 
+PARTITIONED BY (dept STRING);
+
+SET hive.exec.dynamic.partition.mode=nonstrict;
+
+INSERT INTO sirene_mini_dept_partition PARTITION (dept)
+SELECT * FROM sirene_mini_dept where dept in ('04', '44', '80', '87');
+
+SHOW PARTITIONS sirene_mini_dept_partition;
+
+EXPLAIN select a.dept, count(*)
+from (select codpos, SUBSTRING(codpos, 0,2) dept from sirene_mini_ext) a
+group by a.dept;

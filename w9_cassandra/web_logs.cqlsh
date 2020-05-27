@@ -1,0 +1,33 @@
+Aller dans le keyspace Test
+Créer la table suivante : 
+CREATE TABLE WebLogs (
+page_id uuid,
+page_name Text,
+insertion_time timestamp,
+page_count counter,
+PRIMARY KEY (page_id, insertion_time, page_name)
+);
+
+CREATE keyspace website WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1};
+
+CREATE TABLE webLogs (
+page_id uuid,
+page_name Text,
+insertion_time timestamp,
+page_count counter,
+PRIMARY KEY (page_id, insertion_time, page_name)
+);
+
+insert into weblogs (page_id , page_name , insertion_time , page_count ) values(uuid(),’test.com’,dateof(now()),0) ;
+# ne marche pas à cause du compteur 
+# il faut faire un update pour insérer données compteur
+
+UPDATE weblogs 
+SET page_count = page_count +1 
+WHERE page_name = 'page1' 
+and insertion_time = toTimestamp(now()) 
+and page_id = uuid();
+
+
+
+

@@ -1,0 +1,61 @@
+###
+### Create new database animals ###
+###
+
+CREATE KEYSPACE animals WITH REPLICATION = { 'class' : 'SimpleStrategy' , 'replication_factor' : 3 };
+
+# Change replication factor 
+Alter Keyspace animals with replication={'class': 'SimpleStrategy', 'replication_factor': 1};
+
+# Position inside database animals
+USE animals;
+
+# Create table monkeys
+CREATE TABLE monkeys (
+           ... type text,
+           ... family text,
+           ... common_name text,
+           ... conservation_status text,
+           ... avg_weight_in_grams int,
+           ... PRIMARY KEY ((type, family), common_name ));
+
+DESC monkeys
+
+# Insert values
+INSERT INTO monkeys (type, family, common_name, conservation_status)
+VALUES ('New World Monkey', 'Cebidae', 'white-headed capuchin', 'Least concern');
+INSERT INTO monkeys (type, family, common_name, conservation_status, avg_weight_in_grams)
+VALUES ('New World Monkey', 'Cebidae', 'white-fronted capuchin', 'Least concern', 3400);
+INSERT INTO monkeys (type, family, common_name, conservation_status, avg_weight_in_grams)
+VALUES ('New World Monkey', 'Cebidae', 'white-headed capuchin', 'Least concern', 3900);
+INSERT INTO monkeys (type, family, common_name, conservation_status, avg_weight_in_grams)
+VALUES ('New World Monkey', 'Cebidae', 'tufted capuchin', 'Least concern', 4800);
+INSERT INTO monkeys (type, family, common_name, conservation_status, avg_weight_in_grams)
+VALUES ('New World Monkey', 'Cebidae', 'blond capuchin', 'Least concern', 2800);
+INSERT INTO monkeys (type, family, common_name, conservation_status)
+VALUES ('Old World Monkey', 'Colobinae', 'Nilgiri langur', 'vulnerable');
+
+SELECT * FROM monkeys
+
+# Delete line
+# Need to specify primary key (type, family) and cluster key(common_name)
+DELETE FROM monkeys WHERE type='New World Monkey' and family='Cebidae' and common_name='white-headed capuchin'
+
+SELECT * FROM monkeys ;
+
+# Create new monkey 'Southern plains gray langur' because it does not exist already
+# Otherwise would have changed "conservation_status" and "avg_weight_in_grams" of 'Southern plains gray langur' monkey if it existed in the table
+UPDATE monkeys SET conservation_status = 'least concern', avg_weight_in_grams = 3000 where type='Old World Monkey' and family='Colobinae' AND common_name = 'Southern plains gray langur'
+
+SELECT * FROM monkeys ;
+
+# Change values "avg_weight_in_grams" for 'Nilgiri langur' 
+UPDATE monkeys SET avg_weight_in_grams = 1000 where type='Old World Monkey' and family='Colobinae' AND common_name = 'Nilgiri langur' ;
+
+SELECT * FROM monkeys ;
+
+UPDATE monkeys
+USING TTL 60
+SET avg_weight_in_grams = 3000
+WHERE type='Old World Monkey'
+AND family='Colobinae' AND common_name='Southern plains gray langur';

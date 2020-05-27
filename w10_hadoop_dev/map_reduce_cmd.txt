@@ -1,0 +1,6 @@
+# mapreduce en local
+echo "formation big data m2i" | python mapper.py | sort -k1,1 | python reducer.py
+
+# map reduce sur hadoop
+hadoop jar /usr/local/Cellar/hadoop/3.2.1_1/libexec/share/hadoop/mapreduce/hadoop-streaming-3.2.1.jar -file /Users/thomas/Documents/poe_bigdata/s10_hadoop_dev/mapper.py -mapper /Users/thomas/Documents/poe_bigdata/s10_hadoop_dev/mapper.py -file /Users/thomas/Documents/poe_bigdata/s10_hadoop_dev/reducer.py -reducer /Users/thomas/Documents/poe_bigdata/s10_hadoop_dev/reducer.py -input /mapreduce/gutenberg.txt -output /mapreduce/gutenberg-output
+

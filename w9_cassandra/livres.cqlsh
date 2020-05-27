@@ -1,0 +1,65 @@
+Exercice 03 : 
+Création d'un keyspace Test2
+CREATE KEYSPACE Test2 … 
+Vous pouvez voir votre création par la commande suivante :
+DESCRIBE KEYSPACES;
+Ou    DESC KEYSPACES;
+Entrez dans le keyspace Test2
+USE Test2;
+Créer une petite table de données, y ajouter des données et les interroger. C'est juste une petite liste de livres. La table s'appelle livres. 
+Ses colonnes sont :
+isbn (entier), 
+auteur (chaîne), 
+titre (chaîne),
+annee (entier).
+CREATE TABLE test.livres (
+….
+PRIMARY KEY()
+)
+Importer les données
+COPY test.livres (isbn, auteur, titre, annee) FROM '/tmp/livres.csv' WITH HEADER = FALSE ;
+/tmp/livres.csv
+15432,Jules Verne,Le rayon vert,1882 
+67527,Victor Hugo,La Légende des siècles,1855 
+98784,Jules Verne,Face au drapeau,1896 
+76526,Victor Hugo,Les misérables,1862 
+87876,Jules Verne,L'île mystérieuse,1874 
+21435,Jules Verne,De la Terre à la Lune,1865 
+74261,Victor Hugo,Torquemada,1882
+
+CREATE keyspace bibli WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1};
+
+USE bibli;
+CREATE TABLE livres (
+         ... isbn int,
+         ... auteur text,
+         ... titre text,
+         ... annee int,
+         ... PRIMARY KEY(isbn));
+
+desc livres
+
+COPY livres (isbn, auteur, titre, annee) FROM '/Users/thomas/Documents/poe_bigdata/s9_cassandra/livres.csv' WITH HEADER = FALSE ;
+
+#change primary key for testing
+CREATE TABLE livre2 ( isbn int, auteur text, titre text, annee int, Primary key (annee, auteur);
+# Rq: annee est partition key et auteur est clustering key
+# default: (primary key, clustering key1, clustering key2)
+# sinon ((primary key1, primary key2) clustering key)
+
+CREATE TABLE livre3 ( isbn int, auteur text, titre text, annee int, Primary key (auteur, annee));
+# Rq: auteur est partition key et annee est clustering key
+#seul le clustering key permet de faire des where annee < 1850
+
+COPY livre2 (isbn, auteur, titre, annee) FROM '/Users/thomas/Documents/poe_bigdata/s9_cassandra/livres.csv' WITH HEADER = FALSE ;
+
+COPY livre3 (isbn, auteur, titre, annee) FROM '/Users/thomas/Documents/poe_bigdata/s9_cassandra/livres.csv' WITH HEADER = FALSE ;
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,4 @@
+{ "_id": "movie:1", "title": "Vertigo", "year": 1958, "genre":"drama", "country": "USA", 
+"director": { "_id": "artist:3", "last_name": "Hitchcock", "first_name": "Alfred", "birth_date":
+"1899" }, 
+"actors": [{ "_id": "artist:15", "role": "JohnFerguson" }, { "_id": "artist:16", "role": "Madeleine Elster"}] }

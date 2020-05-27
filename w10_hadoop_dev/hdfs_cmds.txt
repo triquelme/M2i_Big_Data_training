@@ -1,0 +1,69 @@
+# Usage
+hdfs dfs -cmd -opt
+# Equivalent
+hadoop fs -cmd -opt
+
+hdfs dfs -help
+
+hdfs dfs -ls /
+
+hdfs dfs -mkdir /test
+
+hdfs dfs -ls /
+
+hdfs dfs -chmod 777 /test
+# important de donner les autres à l'utilisateur autre pour pouvoir uploader fichier via http://localhost:9870/
+
+hdfs dfs -ls /
+
+# mettre un fichier du répertoire local linux vers hdfs
+hdfs dfs -put films.json /test
+
+# récupérer un fichier de HDFS pour le mettre dans le répertoire local linux
+hdfs dfs -get /test/films.json
+
+hdfs dfs -help get
+
+# compte le nombre de dossiers, fichier et leur taille cumulée
+hdfs dfs -count /
+hdfs dfs -count /test
+hdfs dfs -help count
+
+# donne l'utilisation de l'espace disque hdfs
+hdfs dfs -df -h
+hdfs dfs -help df
+
+hdfs dfs -mkdir /demo
+
+hdfs dfs -cp /test/films.json /demo
+
+hdfs dfs -mv /test/films.json /demo
+
+hdfs dfs -ls /demo/
+
+# ls récursif
+hdfs dfs -lsr /
+
+hdfs dfs rm /test/films.json
+
+# rm récursif
+hdfs dfs rmr /test
+
+hdfs dfs -help stat
+hdfs dfs -stat /demo/films.json
+hdfs dfs -stat %b /demo/films.json
+hdfs dfs -stat %a /demo/films.json
+hdfs dfs -stat %o /demo/films.json
+hdfs dfs -stat %r /demo/films.json
+
+hdfs dfs -cat /test/Hadoop_Configuration.txt | head -n 6
+hdfs dfs -cat /test/Hadoop_Configuration.txt | tail
+hdfs dfs -head /test/Hadoop_Configuration.txt
+hdfs dfs -tail /test/Hadoop_Configuration.txt
+
+hdfs dfs -du -h /test
+> [size] [disk space consumed] (= [size] x replication) [file name]
+
+
+
+

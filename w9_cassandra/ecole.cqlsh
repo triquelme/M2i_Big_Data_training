@@ -1,0 +1,56 @@
+Créer le keyspace ecole :
+CREATE KEYSPACE IF NOT EXISTS formation …
+
+CREATE keyspace ecole WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1};
+
+#Placez-vous dans le keyspace Formation :
+USE ecole;
+
+#Au lieu de créer deux tables : Cours et Enseignant
+# on va créer une mega table contenant les infos des deux tables 
+
+Cours est composé des champs suivants : 
+idCours INT, 
+Intitule VARCHAR, 
+Responsable INT, 
+Niveau VARCHAR, 
+nbHeuresMax INT, 
+Coeff INT
+
+Enseignant est composé des champs suivants : 
+idEnseignant INT, 
+Nom VARCHAR, 
+Prenom VARCHAR, 
+status VARCHAR,
+Pour la premery key c'est à vous de la définir.
+
+# la table cours sera contenu dans un type cours
+CREATE TYPE cours (
+idcours int,
+intitule text,
+niveau text,
+nbHeuresMax int,
+coeff int
+);
+
+# type cours qui sera assigné à un enseignant dans la table ’EnseignantCours’
+#créer table ’EnseignantCours’
+CREATE TABLE EnseignantCours
+(
+idEnseignant int,
+Nom text,
+Prenom text,
+status text,
+cours map <int,frozen<cours>>,
+PRIMARY KEY (idEnseignant)
+);
+
+Insérer les données suivantes :
+INSERT INTO EnseignantCours (idEnseignant,Nom,Prenom,status,cours) VALUES (1,'Travers','Nicolas','Vacataire', {1:{idcours:1,intitule:'Introduction aux Bases de Donnees',niveau:'M1',nbHeuresMax:30,Coeff:3}, 4:{idcours:4,intitule:'Bases de Donnees Avancees',niveau:'M2',nbHeuresMax:30,coeff:5}}); 
+INSERT INTO EnseignantCours (idEnseignant,Nom,Prenom,status,cours) VALUES (2,'Mourier','Pascale','Titulaire', {}); 
+INSERT INTO EnseignantCours (idEnseignant,Nom,Prenom,status,cours) VALUES (3,'Boisson','Francois','Vacataire', {}); 
+INSERT INTO EnseignantCours (idEnseignant,Nom,Prenom,status,cours) VALUES (4,'Mathieu','Eric','Titulaire', {4:{idcours:2,intitule:'Immeubles de Grandes Hauteurs',niveau:'M1',nbHeuresMax:30,coeff:2}}); 
+INSERT INTO EnseignantCours (idEnseignant,Nom,Prenom,status,cours) VALUES (5,'Chu','Chengbin','Titulaire', {}); 
+INSERT INTO EnseignantCours (idEnseignant,Nom,Prenom,status,cours) VALUES (6,'Boutin','Philippe','Titulaire', {5:{idcours:5,intitule:'Architecture des Systemes Materiel',niveau:'M2',nbHeuresMax:8,coeff:1}}); 
+INSERT INTO EnseignantCours (idEnseignant,Nom,Prenom,status,cours) VALUES (7,'Escribe','Julien','Vacataire', {6:{idcours:6,intitule:'IT Business / Introduction',niveau:'M2',nbHeuresMax:20,coeff:3}}); 
+INSERT INTO EnseignantCours (idEnseignant,Nom,Prenom,status,cours) VALUES (8,'Znaty','David','Vacataire', {7:{idcours:7,intitule:'IT Business / Strategie et Management',niveau:'M2',nbHeuresMax:10,coeff:1}});

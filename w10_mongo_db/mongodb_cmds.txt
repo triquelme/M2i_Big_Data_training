@@ -1,0 +1,59 @@
+show databases
+
+use db1
+
+# insert
+document = ( { "Type" : "Book", "Title" : "Definitive Guide to MongoDB", "ISBN" : "987-1-4302-3051-9",
+"Publisher" : "Apress", "Author": ["Membrey, Peter", "Plugge, Eelco", "Hawkins, Tim" ] } )
+doc2 = { "_id" : ObjectId("56d00f02778d8f0af3ecc6f0"), "Type" : "Book", "Title" : "Definitive Guide to MongoDB", "ISBN" : "987-1-4302-3051-9", "Publisher" : "Apress", "Author" : [ "Membrey, Peter", "Plugge, Eelco", "Hawkins, Tim" ] }
+doc3 = { "_id" : ObjectId("56d00fca778d8f0af3ecc6f1"), "Type" : "CD", "Artist" : "Nirvana", "Title" : "Nevermind", "Tracklist" : [ { "Track" : "1", "Title" : "Smells like teen spirit", "Length" : "5:02" }, { "Track" : "2", "Title" : "In Bloom", "Length" : "4:15" } ] }
+
+db.books.insertOne(document)
+db.books.insertMany([doc2, doc3])
+
+db.books.insertMany([
+   { item: "journal", qty: 25, tags: ["blank", "red"], size: { h: 14, w: 21, uom: "cm" } },
+   { item: "mat", qty: 85, tags: ["gray"], size: { h: 27.9, w: 35.5, uom: "cm" } },
+   { item: "mousepad", qty: 25, tags: ["gel", "blue"], size: { h: 19, w: 22.85, uom: "cm" } }])
+
+# delete elements in collection
+db.books.remove({})
+
+db.books.remove({"_id" : ObjectId("5eb267e2a3bf7e2ccf30efa1")})
+
+# list elements in collection
+db.books.find()
+
+# count
+db.books.find().count()
+
+# show element of type books
+db.books.find({"Type": "Book"})
+
+# show element of type books, and select title and author fields
+db.books.find({"Type": "Book"}, {"Title":1, "Author":1})
+
+# show all fields except title
+db.books.find({"Type": "Book"}, {"Title":0})
+
+# select document with Author of size 3 
+db.books.find({"Author":{$size:3}}, {"Title":0})
+
+# get infos about collections
+db.getCollectionInfos()
+db.getCollectionNames()
+
+# update
+db.books.updateMany({},{$set: {“qty”: 100}})
+db.books.updateMany({“item”: “journal”},{$set: {“qty”: 50}})
+db.books.updateMany({“item”: { $exists: true}},{$set: {“qty”: 50}})
+
+db.books.update({"Type": "Book"},{$unset: {"Publisher": ""}})
+
+# import (in the terminal)
+mongoimport -d db1 -c clients --type csv --file ./leads.csv --headerline
+
+mongoimport -d db1 -c clients2 --type json --file ./leads.json 
+
+
+

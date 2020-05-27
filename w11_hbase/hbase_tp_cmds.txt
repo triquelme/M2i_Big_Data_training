@@ -1,0 +1,68 @@
+create_namespace 'namespace_thomas'
+
+list_namespace
+
+describe_namespace 'namespace_thomas'
+
+create 'namespace_thomas:ventes', 'client_cf', 'commande_cf'
+
+list_namespace_tables 'namespace_thomas'
+
+describe 'namespace_thomas:ventes'
+
+# pour supprimer une table
+disable 'ventes'
+drop 'ventes'
+
+# pour supprimer une ligne
+delete 'namesapce_thomas:music', 1, ‘album:1’
+
+put 'namespace_thomas:ventes', 10001, 'client_cf:nom', 'DURAND'
+put 'namespace_thomas:ventes', 10001, 'client_cf:adresse', '1 rue du Lac, Paris'
+put 'namespace_thomas:ventes', 10001, 'client_cf:tel', '01.23.45.67.89'
+put 'namespace_thomas:ventes', 10001, 'commande_cf:adresse_livraison', '1 rue du Lac, Paris'
+put 'namespace_thomas:ventes', 10001, 'commande_cf:mode_paiement', 'CHEQUE'
+put 'namespace_thomas:ventes', 10001, 'commande_cf:montant', 630
+
+scan 'namespace_thomas:ventes’
+
+delete 'namespace_thomas:ventes', 10001, 'commande_cf:adresse_livraison'
+
+put 'namespace_thomas:ventes', 10002, 'client_cf:nom', 'DUPONT'
+put 'namespace_thomas:ventes', 10002, 'client_cf:adresse', '10 avenue Knox, Nanterre'
+
+# pour supprimer une colonne d'une ligne
+delete 'namespace_thomas:ventes', 10002, 'client_cf:adresse'
+
+# pour supprimer toutes les colonnes d'une ligne
+deleteall 'namespace_thomas:ventes', 10002
+
+alter 'namespace_thomas:ventes', {NAME => 'client_cf', VERSIONS => 10}, {NAME => 'commande_cf', VERSIONS => 10}
+
+describe 'namespace_thomas:ventes'
+
+# Faire une insertion d'une colonne existante
+put 'namespace_thomas:ventes', 10001, 'client_cf:nom', 'DUGRAND'
+
+# Lire les 2 dernières versions de chaque ligne de la table
+scan 'namespace_thomas:ventes', {VERSIONS => 2 }
+
+# Lire uniquement la dernière versions de chaque ligne de la table
+scan 'namespace_thomas:ventes'
+
+# Lire la dernière version d'une colonne d'une rowkey
+get 'namespace_thomas:ventes', 10001, {COLUMN=>'client_cf:nom’}
+
+# Lire une version d'une colonne, à un timestamp donné
+get 'namespace_thomas:ventes', 10001, {COLUMN=>'client_cf:nom', TIMESTAMP => 1589448318356}
+
+# Lire toutes les versions d'une colonne, dans un intervalle de temps donné
+# Attention: la borne supérieure de l'intervalle est exclue 
+get 'namespace_thomas:ventes', 10001, {COLUMN => 'client_cf:nom', TIMERANGE => [1589448318356, 1589451941981], VERSIONS => 4}
+
+
+
+
+
+
+
